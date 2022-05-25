@@ -47,7 +47,7 @@ from torch_audiomentations.core.transforms_interface import BaseWaveformTransfor
 from torchmetrics import Metric, MetricCollection
 from typing_extensions import Literal
 
-from pyannote.audio.utils.loss import binary_cross_entropy, nll_loss
+from pyannote.audio.utils.loss import binary_cross_entropy, nll_loss, mse_loss
 from pyannote.audio.utils.protocol import check_protocol
 
 
@@ -316,6 +316,9 @@ class Task(pl.LightningDataModule):
 
         elif specifications.problem == Problem.MONO_LABEL_CLASSIFICATION:
             return nll_loss(prediction, target, weight=weight)
+
+        elif specifications.problem == Problem.REGRESSION:
+            return mse_loss(prediction, target, weight=weight)
 
         else:
             msg = "TODO: implement for other types of problems"

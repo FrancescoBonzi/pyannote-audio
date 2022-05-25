@@ -403,6 +403,19 @@ class SegmentationTaskMixin:
             # TODO: implement when pyannote.audio gets its first mono-label segmentation task
             raise NotImplementedError()
 
+        elif self.specifications.problem == Problem.REGRESSION:
+            # target: shape (batch_size, num_frames, num_classes), type binary
+            # preds:  shape (batch_size, num_frames, num_classes), type float
+
+            # torchmetrics expects
+            # target: shape (batch_size, num_classes, ...), type binary
+            # preds:  shape (batch_size, num_classes, ...), type float
+
+            self.model.validation_metric(
+                torch.transpose(preds, 1, 2),
+                torch.transpose(target, 1, 2),
+            )
+
         self.model.log_dict(
             self.model.validation_metric,
             on_step=False,
