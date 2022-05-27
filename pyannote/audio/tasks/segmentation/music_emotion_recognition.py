@@ -22,7 +22,6 @@
 
 from typing import Dict, Sequence, Text, Tuple, Union
 
-import torch
 from pyannote.database import Protocol
 from torch_audiomentations.core.transforms_interface import BaseWaveformTransform
 from torchmetrics import Metric
@@ -32,13 +31,7 @@ from pyannote.audio.tasks.segmentation.mixins import SegmentationTaskMixin
 
 
 class MusicEmotionRecognition(SegmentationTaskMixin, Task):
-    """Voice activity detection
-
-    Voice activity detection (or VAD) is the task of detecting speech regions
-    in a given audio recording.
-
-    It is addressed as a binary (0 or 1) sequence labeling task. A frame is
-    marked as "speech" (1) as soon as at least one speaker is active.
+    """Music Emotion Recognition
 
     Parameters
     ----------
@@ -105,7 +98,7 @@ class MusicEmotionRecognition(SegmentationTaskMixin, Task):
 
         self.specifications = Specifications(
             problem=Problem.REGRESSION,
-            resolution=Resolution.CHUNK,
+            resolution=Resolution.FRAME,
             duration=self.duration,
             warm_up=self.warm_up,
             classes=[

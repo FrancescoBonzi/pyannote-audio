@@ -479,6 +479,9 @@ class Model(pl.LightningModule):
         elif specifications.problem == Problem.MULTI_LABEL_CLASSIFICATION:
             return nn.Sigmoid()
 
+        elif specifications.problem == Problem.REGRESSION:
+            return nn.Sigmoid()
+
         else:
             msg = "TODO: implement default activation for other types of problems"
             raise NotImplementedError(msg)

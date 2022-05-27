@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 from .segmentation.voice_activity_detection import VoiceActivityDetection  # isort:skip
+
 from .segmentation.overlapped_speech_detection import (  # isort:skip
     OverlappedSpeechDetection,
 )
@@ -31,6 +32,8 @@ from .segmentation.segmentation import Segmentation  # isort:skip
 
 from .embedding.arcface import SupervisedRepresentationLearningWithArcFace  # isort:skip
 
+from .segmentation.music_emotion_recognition import MusicEmotionRecognition  # isort:skip
+
 SpeakerEmbedding = SupervisedRepresentationLearningWithArcFace
 
 __all__ = [
@@ -39,4 +42,5 @@ __all__ = [
     "OverlappedSpeechDetection",
     "SpeakerTracking",
     "SpeakerEmbedding",
+    "MusicEmotionRecognition"
 ]
